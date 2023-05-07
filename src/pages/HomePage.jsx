@@ -1,30 +1,41 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { getAllData } from "../service/service"
 
 const HomePage = () => {
-    useEffect(() => {
-        console.log("work")
-        getAllData().then(data => console.log(data))
-        .catch( error => console.log(error))
-    },[]
-    )
+    const [ipAddress, setIpAddress] = useState()
+        
+
+        useEffect(() => {
+            getAllData().then(data => setIpAddress(data.data))
+            .catch( error => console.log(error))
+        },[]
+        )
+    
 return(
     <div className="container">
-      <table className="table">
+        <div className="row">
+            <div className="col-3">
+      <table className="table ">
         <thead>
             <tr><th>
             Ip address
                 </th></tr>
            </thead>
            <tbody>
-            <tr>
-                
-               
-                <td>1.1.1</td>
-            </tr>
+            {
+                ipAddress?.map( el => {
+                    return(
+                        <tr key={el._id}>
+                            <td>{el.ip}</td>
+                        </tr>
+                    )
+                })
+            }
            </tbody>
 
       </table>
+      </div>
+      </div>
     </div>
 )
 }
