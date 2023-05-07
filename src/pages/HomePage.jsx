@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getAllData } from "../service/service";
-import moment from "moment";
 
 const HomePage = () => {
   const [ipAddress, setIpAddress] = useState();
