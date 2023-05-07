@@ -25,9 +25,9 @@ const HomePage = () => {
   };
 
   const delateRow = (id) => {
-    fetch(`/api/items/${id}`, {
-        method: 'DELETE',
-      })
+    fetch(`https://localhost:5050/api/items/${id}`, {
+      method: "DELETE",
+    });
   };
 
   return (
