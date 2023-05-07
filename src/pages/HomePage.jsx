@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllData } from "../service/service";
+import { deleteAddress, findInfoIp, getAllData } from "../service/service";
 
 const HomePage = () => {
   const [ipAddress, setIpAddress] = useState();
@@ -15,18 +15,16 @@ const HomePage = () => {
   }, []);
 
   const findData = (ip) => {
-    fetch(`https://ipapi.co/${ip}/json/`)
-      .then((response) => response.json())
+    findInfoIp(ip)
       .then((data) => {
-        console.log(data);
-        setInformation({ country: data.country_name, city: data.city });
+        setInformation({ country: data.data.country_name, city: data.data.city });
       });
   };
 
-  const delateRow = (id) => {
-    fetch(`https://localhost:5050/api/items/${id}`, {
-      method: "DELETE",
-    });
+  const deleteRow = (id) => {
+    deleteAddress(id).then( res => getAllData()
+    .then((data) => setIpAddress(data.data))
+    .catch((error) => console.log(error)))
   };
 
   return (
@@ -55,7 +53,7 @@ const HomePage = () => {
                     <td>
                       <button
                         className="btn btn-sm btn-danger"
-                        onClick={() => delateRow(el._id)}
+                        onClick={() => deleteRow(el._id)}
                       >
                         Delete
                       </button>
