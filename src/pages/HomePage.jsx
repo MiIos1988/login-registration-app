@@ -30,7 +30,7 @@ const HomePage = () => {
   return (
     <div className="container">
       <div className="row mt-3">
-        <div className="col-5">
+        <div className="col-xl-6">
           <table className="table border table-striped">
             <thead>
               <tr>
@@ -44,12 +44,21 @@ const HomePage = () => {
             </thead>
             <tbody>
               {ipAddress?.map((el, index) => {
-                const dataFormat = new Date(el.createdAt).toLocaleString();
+                const dataObject = new Date(el.createdAt);
+                const day = String(dataObject.getDate()).padStart(2, "0");
+                const month = String(dataObject.getMonth() + 1).padStart(2, "0");
+                const year = dataObject.getFullYear();
+                const dataFormat = `${day}-${month}-${year}`;
+                const localTime = dataObject.toLocaleTimeString("sr-RS", {
+                    timeZone: "Europe/Belgrade",
+                  });
+                 
+
                 return (
                   <tr key={el._id}>
                     <td>{index + 1}</td>
                     <td>{el.ip}</td>
-                    <td>{dataFormat}</td>
+                    <td>{dataFormat + " " + localTime}</td>
                     <td>
                       <button
                         className="btn btn-sm btn-danger"
@@ -72,7 +81,7 @@ const HomePage = () => {
             </tbody>
           </table>
         </div>
-        <div className="col-5 offset-2">
+        <div className="col-4 gap-5">
           <table className="table border">
             <tbody>
               <tr>
