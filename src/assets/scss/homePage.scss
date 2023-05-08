@@ -1,0 +1,12 @@
+.ipAddress {
+    max-height: 95vh;
+}
+
+@media (max-width: 1200px) {
+
+    .ipAddress {
+        max-height: 80vh;
+        padding: 0 !important;
+    }
+
+}

@@ -22,16 +22,16 @@ const HomePage = () => {
   };
 
   const deleteRow = (id) => {
-    deleteAddress(id).then( res => getAllData()
-    .then((data) => setIpAddress(data.data))
-    .catch((error) => console.log(error)))
+    deleteAddress(id).then(res => getAllData()
+      .then((data) => setIpAddress(data.data))
+      .catch((error) => console.log(error)))
   };
 
   return (
     <div className="container">
-      <div className="row mt-3">
-        <div className="col-xl-6">
-          <table className="table border table-striped">
+      <div className="row mt-3  d-flex justify-content-center">
+        <div className="col-xl-6 table-responsive ipAddress">
+          <table className="table border table-striped table-hover">
             <thead>
               <tr>
                 <th>Num</th>
@@ -48,16 +48,23 @@ const HomePage = () => {
                 const day = String(dataObject.getDate()).padStart(2, "0");
                 const month = String(dataObject.getMonth() + 1).padStart(2, "0");
                 const year = dataObject.getFullYear();
-                const dataFormat = `${day}-${month}-${year}`;
+                const dataFormat = `${day}/${month}/${year}`;
                 const localTime = dataObject.toLocaleTimeString("sr-RS", {
-                    timeZone: "Europe/Belgrade",
-                  });
-                 
+                  timeZone: "Europe/Belgrade",
+                });
 
                 return (
                   <tr key={el._id}>
                     <td>{index + 1}</td>
                     <td>{el.ip}</td>
+                    <td>
+                      <button
+                        className="btn btn-sm btn-success "
+                        onClick={() => findData(el.ip)}
+                      >
+                        View
+                      </button>
+                    </td>
                     <td>{dataFormat + " " + localTime}</td>
                     <td>
                       <button
@@ -67,22 +74,15 @@ const HomePage = () => {
                         Delete
                       </button>
                     </td>
-                    <td>
-                      <button
-                        className="btn btn-sm btn-success "
-                        onClick={() => findData(el.ip)}
-                      >
-                        View
-                      </button>
-                    </td>
+
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
-        <div className="col-4 gap-5">
-          <table className="table border">
+        <div className="col-md-4 gap-5 mt-3">
+          <table className="table border ">
             <tbody>
               <tr>
                 <th scope="row">Country</th>
