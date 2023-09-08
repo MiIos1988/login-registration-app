@@ -74,7 +74,6 @@ const HomePage = () => {
                         Delete
                       </button>
                     </td>
-
                   </tr>
                 );
               })}
