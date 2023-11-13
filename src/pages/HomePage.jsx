@@ -128,7 +128,8 @@ const HomePage = () => {
             className="btn btn-danger"
             onClick={async () => {
               await deleteAllAddress();
-              await getAllData();
+              const data = await getAllData();
+              setIpAddress(data);
               setOpenModal(false);
             }}
           >
