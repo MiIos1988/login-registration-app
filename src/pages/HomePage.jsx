@@ -8,7 +8,7 @@ const HomePage = () => {
     city: "",
   });
 
-  useEffect(() => {cd
+  useEffect(() => {
     getAllData()
       .then((data) => setIpAddress(data.data))
       .catch((error) => console.log(error));
