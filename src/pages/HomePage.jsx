@@ -127,7 +127,8 @@ const HomePage = () => {
           <button
             className="btn btn-danger"
             onClick={async () => {
-              let deleteAll = await deleteAllAddress();
+              await deleteAllAddress();
+              await getAllData();
               setOpenModal(false);
             }}
           >

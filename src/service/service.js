@@ -4,6 +4,6 @@ export const getAllData = () => axios.get("https://ip-service.onrender.com/api/g
 
 export const deleteAddress = (id) => axios.delete(`https://ip-service.onrender.com/api/items/${id}`);
 
-export const deleteAllAddress = (id) => axios.delete("https://ip-service.onrender.com/api/delete-all");
+export const deleteAllAddress = () => axios.delete("https://ip-service.onrender.com/api/delete-all");
 
 export const findInfoIp = (ip) => axios.get(`https://ipapi.co/${ip}/json/`);
