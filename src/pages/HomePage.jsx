@@ -95,6 +95,7 @@ const HomePage = () => {
           </table>
         </div>
       </div>
+      <button className="btn btn-danger position-fixed bottom-0 end-0 translate-middle">DELETE ALL</button>
     </div>
   );
 };
