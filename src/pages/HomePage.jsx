@@ -96,6 +96,13 @@ const HomePage = () => {
         </div>
       </div>
       <button className="btn btn-danger position-fixed bottom-0 end-0 translate-middle">DELETE ALL</button>
+      <div className="border border-danger p-5 position-fixed top-50 start-50 translate-middle">
+        <h3>Are you sure you want to delete everything?</h3>
+        <div className="text-center p-3">
+          <button className="btn btn-secondary me-3">Close</button>
+          <button className="btn btn-danger">DELETE ALL</button>
+        </div>
+      </div>
     </div>
   );
 };
