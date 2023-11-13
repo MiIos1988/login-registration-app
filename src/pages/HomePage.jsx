@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { deleteAddress, findInfoIp, getAllData } from "../service/service";
+import {
+  deleteAddress,
+  deleteAllAddress,
+  findInfoIp,
+  getAllData,
+} from "../service/service";
 
 const HomePage = () => {
   const [ipAddress, setIpAddress] = useState();
@@ -7,6 +12,7 @@ const HomePage = () => {
     country: "",
     city: "",
   });
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     getAllData()
@@ -15,16 +21,17 @@ const HomePage = () => {
   }, []);
 
   const findData = (ip) => {
-    findInfoIp(ip)
-      .then((data) => {
-        setInformation({ country: data.data.country_name, city: data.data.city });
-      });
+    findInfoIp(ip).then((data) => {
+      setInformation({ country: data.data.country_name, city: data.data.city });
+    });
   };
 
   const deleteRow = (id) => {
-    deleteAddress(id).then(res => getAllData()
-      .then((data) => setIpAddress(data.data))
-      .catch((error) => console.log(error)))
+    deleteAddress(id).then((res) =>
+      getAllData()
+        .then((data) => setIpAddress(data.data))
+        .catch((error) => console.log(error))
+    );
   };
 
   return (
@@ -46,7 +53,10 @@ const HomePage = () => {
               {ipAddress?.map((el, index) => {
                 const dataObject = new Date(el.createdAt);
                 const day = String(dataObject.getDate()).padStart(2, "0");
-                const month = String(dataObject.getMonth() + 1).padStart(2, "0");
+                const month = String(dataObject.getMonth() + 1).padStart(
+                  2,
+                  "0"
+                );
                 const year = dataObject.getFullYear();
                 const dataFormat = `${day}/${month}/${year}`;
                 const localTime = dataObject.toLocaleTimeString("sr-RS", {
@@ -95,12 +105,34 @@ const HomePage = () => {
           </table>
         </div>
       </div>
-      <button className="btn btn-danger position-fixed bottom-0 end-0 translate-middle">DELETE ALL</button>
-      <div className="border border-danger p-5 position-fixed top-50 start-50 translate-middle">
+      <button
+        className="btn btn-danger position-fixed bottom-0 end-0 translate-middle"
+        onClick={() => setOpenModal(true)}
+      >
+        DELETE ALL
+      </button>
+      <div
+        className={`border border-danger p-5 position-fixed top-50 start-50 translate-middle bg-light ${
+          !openModal ? "d-none" : "d-block"
+        } `}
+      >
         <h3>Are you sure you want to delete everything?</h3>
         <div className="text-center p-3">
-          <button className="btn btn-secondary me-3">Close</button>
-          <button className="btn btn-danger">DELETE ALL</button>
+          <button
+            className="btn btn-secondary me-3"
+            onClick={() => setOpenModal(false)}
+          >
+            Close
+          </button>
+          <button
+            className="btn btn-danger"
+            onClick={async () => {
+              let deleteAll = await deleteAllAddress();
+              setOpenModal(false);
+            }}
+          >
+            DELETE ALL
+          </button>
         </div>
       </div>
     </div>
