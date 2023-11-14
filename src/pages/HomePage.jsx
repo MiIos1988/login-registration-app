@@ -34,11 +34,6 @@ const HomePage = () => {
     );
   };
 
-  useEffect(() => {
-    console.log(ipAddress)
-  },[ipAddress ]
-  )
-
   return (
     <div className="container">
       <div className="row mt-3  d-flex justify-content-center">
@@ -133,7 +128,6 @@ const HomePage = () => {
             className="btn btn-danger"
             onClick={async () => {
               await deleteAllAddress();
-              // await getAllData();
               setIpAddress([]);
               setOpenModal(false);
             }}
