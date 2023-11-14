@@ -7,7 +7,7 @@ import {
 } from "../service/service";
 
 const HomePage = () => {
-  const [ipAddress, setIpAddress] = useState();
+  const [ipAddress, setIpAddress] = useState([]);
   const [information, setInformation] = useState({
     country: "",
     city: "",
