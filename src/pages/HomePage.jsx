@@ -34,6 +34,11 @@ const HomePage = () => {
     );
   };
 
+  useEffect(() => {
+    console.log(ipAddress)
+  },[ipAddress ]
+  )
+
   return (
     <div className="container">
       <div className="row mt-3  d-flex justify-content-center">
